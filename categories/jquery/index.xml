@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JQuery on Joost&#39;s blog</title>
-    <link>https://joost.haneveer.nl/categories/jquery/</link>
+    <link>https://joosthaneveer.github.io/categories/jquery/</link>
     <description>Recent content in JQuery on Joost&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 26 Apr 2012 06:44:59 +0000</lastBuildDate>
     
-	<atom:link href="https://joost.haneveer.nl/categories/jquery/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://joosthaneveer.github.io/categories/jquery/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Load JQuery scripts from a CDN with local fallback</title>
-      <link>https://joost.haneveer.nl/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</link>
+      <link>https://joosthaneveer.github.io/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</link>
       <pubDate>Thu, 26 Apr 2012 06:44:59 +0000</pubDate>
       
-      <guid>https://joost.haneveer.nl/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</guid>
+      <guid>https://joosthaneveer.github.io/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</guid>
       <description>How many unique visitors you&amp;rsquo;ve got last month? I bet the number is still under 1 billion, right?</description>
     </item>
     
