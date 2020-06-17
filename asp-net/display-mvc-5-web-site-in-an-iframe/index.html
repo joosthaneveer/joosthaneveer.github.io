@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.72.0" />
+
+  <title>Display MVC 5 web site in an IFrame &middot; Joost&#39;s blog</title>
+
+  <meta name="description" content="" />
+
+  
+
+<meta itemprop="name" content="Display MVC 5 web site in an IFrame">
+<meta itemprop="description" content="ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application.">
+<meta itemprop="datePublished" content="2013-10-28T10:32:19&#43;00:00" />
+<meta itemprop="dateModified" content="2013-10-28T10:32:19&#43;00:00" />
+<meta itemprop="wordCount" content="128">
+
+
+
+<meta itemprop="keywords" content="httpheader,iframe,x-frame-options," />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Display MVC 5 web site in an IFrame"/>
+<meta name="twitter:description" content="ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application."/>
+
+
+<meta property="og:title" content="Display MVC 5 web site in an IFrame" />
+<meta property="og:description" content="ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joost.haneveer.nl/asp-net/display-mvc-5-web-site-in-an-iframe/" />
+<meta property="article:published_time" content="2013-10-28T10:32:19+00:00" />
+<meta property="article:modified_time" content="2013-10-28T10:32:19+00:00" />
+
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/hyde.css">
+
+  
+
+
+  
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+      <div class="author-image">
+        <img src="https://www.gravatar.com/avatar/6fcb81b5de538fb939bc87beb56592d8?s=200&d=mp" class="img-circle img-headshot center" alt="Gravatar">
+      </div>
+      
+
+      <h1>Joost&#39;s blog</h1>
+
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://joost.haneveer.nl/">Home</a>
+        </li>
+        <li>
+          <a href="/posts/">Posts</a>
+        </li><li>
+          <a href="/about/">About</a>
+        </li><li>
+          <a href="/categories/">Categories</a>
+        </li><li>
+          <a href="/tags/">Tags</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://www.linkedin.com/in/joosthaneveer" rel="me" title="Linkedin" target="_blank">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://github.com/joosthaneveer" rel="me" title="GitHub" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://twitter.com/joosthaneveer" rel="me" title="Twitter" target="_blank">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>Display MVC 5 web site in an IFrame</h1>
+
+  <div class="post-date">
+    <time datetime="2013-10-28T10:32:19Z">Oct 28, 2013</time> &middot; 1 min read
+  </div>
+
+  <p>ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application. That header is intended to prevent click jacking and makes sure your site can’t be loaded in an IFrame.
+You can find more information about this header <a href="http://blogs.msdn.com/b/ieinternals/archive/2010/03/30/combating-clickjacking-with-x-frame-options.aspx">here</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+  
+  
+  '
+  
+    src="/asp-net/display-mvc-5-web-site-in-an-iframe/httpheader-xframe.png" 
+  
+  alt="Available response headers on a default ASP.Net website">
+<p>But if you want to display your web application in an IFrame, the header is a pain the ass. The information about how to disable this header is not easy to find, the only solution I found is on a <a href="http://shiba-yan.hatenablog.jp/entry/20131019/1382147363">Japanese blog</a>.</p>
+<p>The solution is easy to implement; you can disable the header by placing the following code in your Global.asax.cs file.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#00a8c8">protected</span> <span style="color:#00a8c8">void</span> <span style="color:#111">Application_Start</span><span style="color:#111">()</span>
+<span style="color:#111">{</span>
+  <span style="color:#111">AreaRegistration</span><span style="color:#111">.</span><span style="color:#111">RegisterAllAreas</span><span style="color:#111">();</span>
+
+  <span style="color:#111">WebApiConfig</span><span style="color:#111">.</span><span style="color:#111">Register</span><span style="color:#111">(</span><span style="color:#111">GlobalConfiguration</span><span style="color:#111">.</span><span style="color:#111">Configuration</span><span style="color:#111">);</span>
+  <span style="color:#111">FilterConfig</span><span style="color:#111">.</span><span style="color:#111">RegisterGlobalFilters</span><span style="color:#111">(</span><span style="color:#111">GlobalFilters</span><span style="color:#111">.</span><span style="color:#111">Filters</span><span style="color:#111">);</span>
+  <span style="color:#111">RouteConfig</span><span style="color:#111">.</span><span style="color:#111">RegisterRoutes</span><span style="color:#111">(</span><span style="color:#111">RouteTable</span><span style="color:#111">.</span><span style="color:#111">Routes</span><span style="color:#111">);</span>
+  <span style="color:#111">BundleConfig</span><span style="color:#111">.</span><span style="color:#111">RegisterBundles</span><span style="color:#111">(</span><span style="color:#111">BundleTable</span><span style="color:#111">.</span><span style="color:#111">Bundles</span><span style="color:#111">);</span>
+<span style="display:block;width:100%;background-color:#e1e1e1">  <span style="color:#75715e">// Disable the HTTP Header X-Frame-Options: SAMEORIGIN
+</span></span><span style="display:block;width:100%;background-color:#e1e1e1"><span style="color:#75715e"></span>  <span style="color:#111">AntiForgeryConfig</span><span style="color:#111">.</span><span style="color:#111">SuppressXFrameOptionsHeader</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span><span style="color:#111">;</span>
+</span><span style="color:#111">}</span>
+</code></pre></div>
+</div>
+
+
+  </main>
+
+  <footer>
+  <div>
+    &copy; Joost Haneveer 2020
+
+    &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank">CC BY-SA 4.0</a>
+
+    
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  
+
+  
+</body>
+</html>
