@@ -1,1 +1,105 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Joost's blog</title><link>https://joosthaneveer.github.io/</link><description>Recent content on Joost's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 16 Oct 2014 06:22:23 +0000</lastBuildDate><atom:link href="https://joosthaneveer.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>How to run SPCAF v5 analysis during TeamBuild in TFS 2013</title><link>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/</link><pubDate>Thu, 16 Oct 2014 06:22:23 +0000</pubDate><guid>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/</guid><description>This how-to is based on the SPCAF how-to written for TFS 2012.</description></item><item><title>How to run SPCAF v4 analysis during TeamBuild in TFS 2013</title><link>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/</link><pubDate>Fri, 06 Dec 2013 13:17:44 +0000</pubDate><guid>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/</guid><description>Update October 15, 2014: This post is based on SPCAF version 4.</description></item><item><title>MSDN Subscriber downloads using Internet Explorer 11</title><link>https://joosthaneveer.github.io/msdn/msdn-subscriber-downloads-using-internet-explorer-11/</link><pubDate>Thu, 28 Nov 2013 13:59:14 +0000</pubDate><guid>https://joosthaneveer.github.io/msdn/msdn-subscriber-downloads-using-internet-explorer-11/</guid><description>Internet Explorer 11, that ships with Windows 8.1 and comes as an update for Windows 7, has some problems launching the File Transfer Manager on the MSDN Subscriber Downloads section.</description></item><item><title>Windows Server 2012 R2 installation on HP MicroServer N40L fails</title><link>https://joosthaneveer.github.io/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/</link><pubDate>Tue, 26 Nov 2013 10:30:26 +0000</pubDate><guid>https://joosthaneveer.github.io/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/</guid><description>This weekend I planned to install Windows Server 2012 R2 Essentials on my HP ProLiant MicroServer N40L to replace my WHS 2011 installation.</description></item><item><title>Display MVC 5 web site in an IFrame</title><link>https://joosthaneveer.github.io/asp-net/display-mvc-5-web-site-in-an-iframe/</link><pubDate>Mon, 28 Oct 2013 10:32:19 +0000</pubDate><guid>https://joosthaneveer.github.io/asp-net/display-mvc-5-web-site-in-an-iframe/</guid><description>ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application.</description></item><item><title>Localized resource for token ‘Direction’ could not be found</title><link>https://joosthaneveer.github.io/sharepoint/localized-resource-for-token-direction-could-not-be-found/</link><pubDate>Mon, 21 Oct 2013 11:11:19 +0000</pubDate><guid>https://joosthaneveer.github.io/sharepoint/localized-resource-for-token-direction-could-not-be-found/</guid><description>You have created a neat SharePoint feature that works great. But in the logs files several errors pop up as soon as you deploy the new feature, complaining about a Localized resource token ‘Direction’.</description></item><item><title>Track bugs as backlog items</title><link>https://joosthaneveer.github.io/tfs/track-bugs-as-backlog-items/</link><pubDate>Tue, 08 Oct 2013 14:18:21 +0000</pubDate><guid>https://joosthaneveer.github.io/tfs/track-bugs-as-backlog-items/</guid><description>When you are using the CMMI project template in TFS 2012 and use the Backlog to track your Work Items there are scenarios where you want to see Bugs in your Backlog.</description></item><item><title>Load JQuery scripts from a CDN with local fallback</title><link>https://joosthaneveer.github.io/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</link><pubDate>Thu, 26 Apr 2012 06:44:59 +0000</pubDate><guid>https://joosthaneveer.github.io/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</guid><description>How many unique visitors you&amp;rsquo;ve got last month? I bet the number is still under 1 billion, right?</description></item><item><title>Modify the groups listed when granting permissions to a site</title><link>https://joosthaneveer.github.io/sharepoint/6/</link><pubDate>Wed, 25 Jan 2012 08:44:19 +0000</pubDate><guid>https://joosthaneveer.github.io/sharepoint/6/</guid><description>When you click the button ‘Grant Permissions’ in the Permission screen of a site you always get the option to insert a user inside a SharePoint group.</description></item><item><title>About</title><link>https://joosthaneveer.github.io/about/</link><pubDate>Thu, 17 Nov 2011 08:40:34 +0000</pubDate><guid>https://joosthaneveer.github.io/about/</guid><description>My name is Joost Haneveer, I currently work at BDO for the Global IT Team in Eindhoven (The Netherlands).</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joost&#39;s blog</title>
+    <link>https://joosthaneveer.github.io/</link>
+    <description>Recent content on Joost&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 16 Oct 2014 06:22:23 +0000</lastBuildDate>
+    
+	<atom:link href="https://joosthaneveer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to run SPCAF v5 analysis during TeamBuild in TFS 2013</title>
+      <link>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/</link>
+      <pubDate>Thu, 16 Oct 2014 06:22:23 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/</guid>
+      <description>This how-to is based on the SPCAF how-to written for TFS 2012.</description>
+    </item>
+    
+    <item>
+      <title>How to run SPCAF v4 analysis during TeamBuild in TFS 2013</title>
+      <link>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/</link>
+      <pubDate>Fri, 06 Dec 2013 13:17:44 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/</guid>
+      <description>Update October 15, 2014: This post is based on SPCAF version 4.</description>
+    </item>
+    
+    <item>
+      <title>MSDN Subscriber downloads using Internet Explorer 11</title>
+      <link>https://joosthaneveer.github.io/msdn/msdn-subscriber-downloads-using-internet-explorer-11/</link>
+      <pubDate>Thu, 28 Nov 2013 13:59:14 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/msdn/msdn-subscriber-downloads-using-internet-explorer-11/</guid>
+      <description>Internet Explorer 11, that ships with Windows 8.1 and comes as an update for Windows 7, has some problems launching the File Transfer Manager on the MSDN Subscriber Downloads section.</description>
+    </item>
+    
+    <item>
+      <title>Windows Server 2012 R2 installation on HP MicroServer N40L fails</title>
+      <link>https://joosthaneveer.github.io/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/</link>
+      <pubDate>Tue, 26 Nov 2013 10:30:26 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/</guid>
+      <description>This weekend I planned to install Windows Server 2012 R2 Essentials on my HP ProLiant MicroServer N40L to replace my WHS 2011 installation.</description>
+    </item>
+    
+    <item>
+      <title>Display MVC 5 web site in an IFrame</title>
+      <link>https://joosthaneveer.github.io/asp-net/display-mvc-5-web-site-in-an-iframe/</link>
+      <pubDate>Mon, 28 Oct 2013 10:32:19 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/asp-net/display-mvc-5-web-site-in-an-iframe/</guid>
+      <description>ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application.</description>
+    </item>
+    
+    <item>
+      <title>Localized resource for token ‘Direction’ could not be found</title>
+      <link>https://joosthaneveer.github.io/sharepoint/localized-resource-for-token-direction-could-not-be-found/</link>
+      <pubDate>Mon, 21 Oct 2013 11:11:19 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/sharepoint/localized-resource-for-token-direction-could-not-be-found/</guid>
+      <description>You have created a neat SharePoint feature that works great. But in the logs files several errors pop up as soon as you deploy the new feature, complaining about a Localized resource token ‘Direction’.</description>
+    </item>
+    
+    <item>
+      <title>Track bugs as backlog items</title>
+      <link>https://joosthaneveer.github.io/tfs/track-bugs-as-backlog-items/</link>
+      <pubDate>Tue, 08 Oct 2013 14:18:21 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/tfs/track-bugs-as-backlog-items/</guid>
+      <description>When you are using the CMMI project template in TFS 2012 and use the Backlog to track your Work Items there are scenarios where you want to see Bugs in your Backlog.</description>
+    </item>
+    
+    <item>
+      <title>Load JQuery scripts from a CDN with local fallback</title>
+      <link>https://joosthaneveer.github.io/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</link>
+      <pubDate>Thu, 26 Apr 2012 06:44:59 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/jquery/load-jquery-scripts-from-a-cdn-with-local-fallback/</guid>
+      <description>How many unique visitors you&amp;rsquo;ve got last month? I bet the number is still under 1 billion, right?</description>
+    </item>
+    
+    <item>
+      <title>Modify the groups listed when granting permissions to a site</title>
+      <link>https://joosthaneveer.github.io/sharepoint/6/</link>
+      <pubDate>Wed, 25 Jan 2012 08:44:19 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/sharepoint/6/</guid>
+      <description>When you click the button ‘Grant Permissions’ in the Permission screen of a site you always get the option to insert a user inside a SharePoint group.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://joosthaneveer.github.io/about/</link>
+      <pubDate>Thu, 17 Nov 2011 08:40:34 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/about/</guid>
+      <description>My name is Joost Haneveer, I currently work at BDO for the Global IT Team in Eindhoven (The Netherlands).</description>
+    </item>
+    
+  </channel>
+</rss>

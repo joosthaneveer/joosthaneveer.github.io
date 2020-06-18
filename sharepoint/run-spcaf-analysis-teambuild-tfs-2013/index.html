@@ -1,30 +1,946 @@
-<!doctype html><html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.72.0"><title>How to run SPCAF v4 analysis during TeamBuild in TFS 2013 &#183; Joost's blog</title><meta name=description content><meta itemprop=name content="How to run SPCAF v4 analysis during TeamBuild in TFS 2013"><meta itemprop=description content="Update October 15, 2014: This post is based on SPCAF version 4."><meta itemprop=datePublished content="2013-12-06T13:17:44+00:00"><meta itemprop=dateModified content="2013-12-06T13:17:44+00:00"><meta itemprop=wordCount content="1288"><meta itemprop=keywords content="Build,SPCAF,TFS 2013,"><meta name=twitter:card content="summary"><meta name=twitter:title content="How to run SPCAF v4 analysis during TeamBuild in TFS 2013"><meta name=twitter:description content="Update October 15, 2014: This post is based on SPCAF version 4."><meta property="og:title" content="How to run SPCAF v4 analysis during TeamBuild in TFS 2013"><meta property="og:description" content="Update October 15, 2014: This post is based on SPCAF version 4."><meta property="og:type" content="article"><meta property="og:url" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/"><meta property="article:published_time" content="2013-12-06T13:17:44+00:00"><meta property="article:modified_time" content="2013-12-06T13:17:44+00:00"><link type=text/css rel=stylesheet href=/css/print.css media=print><link type=text/css rel=stylesheet href=/css/poole.css><link type=text/css rel=stylesheet href=/css/hyde.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin=anonymous><link rel=apple-touch-icon-precomposed sizes=144x144 href=/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/favicon.png></head><body><aside class=sidebar><div class=container><div class=sidebar-about><div class=author-image><img src="https://www.gravatar.com/avatar/6fcb81b5de538fb939bc87beb56592d8?s=200&d=mp" class="img-circle img-headshot center" alt=Gravatar></div><h1>Joost's blog</h1></div><nav><ul class=sidebar-nav><li><a href=https://joosthaneveer.github.io/>Home</a></li><li><a href=/posts/>Posts</a></li><li><a href=/about/>About</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li></ul></nav><section class=social-icons><a href=https://www.linkedin.com/in/joosthaneveer rel=me title=Linkedin target=_blank><i class="fab fa-linkedin" aria-hidden=true></i></a><a href=https://github.com/joosthaneveer rel=me title=GitHub target=_blank><i class="fab fa-github" aria-hidden=true></i></a><a href=https://twitter.com/joosthaneveer rel=me title=Twitter target=_blank><i class="fab fa-twitter" aria-hidden=true></i></a></section></div></aside><main class="content container"><div class=post><h1>How to run SPCAF v4 analysis during TeamBuild in TFS 2013</h1><div class=post-date><time datetime=2013-12-06T13:17:44Z>Dec 6, 2013</time> &#183; 7 min read</div><p><strong>Update October 15, 2014:</strong> This post is based on SPCAF version 4.*, and is updated to include the <a href=http://www.spcaf.com/blog/v4-5-5-release-2014-03-20/>TFS Build Activity changes in SPCAF version 4.5.2</a>.</p><p>If you are looking how to run SPCAF v5 during TeamBuild in TFS 2013, see <a href=http://joost.haneveer.nl/sharepoint/run-spcaf-analysis-teambuild/ title="How to run SPCAF v5 analysis during TeamBuild in TFS 2013">this</a> post.</p><hr><p><em>This how-to is based on the <a href=http://docs.spcaf.com/v4/SPCAF_OVERVIEW_660_HOWTORUNSPCAFINTEAMBUILD.html>SPCAF how-to written for TFS 2012</a>.</em></p><p>SharePoint code analysis with <a href=http://www.spcaf.com>SPCAF</a> can also be executed during a TFS Team Build. This helps to ensure the correctness of the SharePoint code. During the Team Build all found errors and warnings are listed in the build result. Additionally the SPCAF reports can be generated and saved to the output directory.</p><p>SPCAF supports the Team Build with the following products:</p><ul><li>TFS 2010</li><li>TFS 2012</li><li>TFS 2013 (with this how-to)</li><li>Team Foundation services (TFS Online)</li></ul><p>To support TFS 2010 and TFS 2012 SPCAF comes with 2 different build activities which can be integrated into the workflow of a Team Build, depending on the version of TFS. The build activities can be found within the installation directory of SPFAC in subfolder “TeamBuildActivities”.</p><ul><li>SPCAF.BuildActivity.TFS2010.dll</li><li>SPCAF.BuildActivity.TFS2012.dll (also used for TFS 2013)</li></ul><p><strong>Note</strong>: The build activities should not be copied directly into the installation folder of SPCAF because SPCAF searches during analysis within the installation folder for custom rules. As the activities depend on Team Build assemblies they cannot be loaded and SPCAF cannot execute.</p><p><strong>Note</strong>: If you are not familiar with configuration of team builds in TFS please request somebody to help you.</p><p>The following steps provide the general instructions for the Team Build. Some standard TFS configuration steps are skipped.</p><h3 id=preparation>Preparation</h3><p>To run SPCAF on the build server the SPCAF assemblies must be available on the build server. You don’t need to install SPCAF on the server!</p><ol><li><p>Open Source Control of TFS and navigate to folder “BuildProcessTemplates” of your team project It is possible that this folder does not exist in your TFS 2013 team project. You can create it manually.</p></li><li><p>Create a subfolder “CustomAssemblies” and check in</p></li><li><p>Within this folder create a subfolder “SPCAF”</p></li><li><p>Copy only the following assemblies from SPCAF installation directory to that folder:</p><ul><li>ICSharpCode.Decompiler.dll</li><li>ICSharpCode.NRefactory.CSharp.dll</li><li>ICSharpCode.NRefactory.dll</li><li>Jurassic.dll</li><li>log4net.dll</li><li>Microsoft.Deployment.Compression.Cab.dll</li><li>Microsoft.Deployment.Compression.dll</li><li>Mono.Cecil.dll</li><li>Mono.Cecil.Pdb.dll</li><li>Mono.Cecil.Rocks.dll</li><li>Spark.dll</li><li>SPCAF.Dependencies.dll</li><li>SPCAF.Engine.dll</li><li>SPCAF.Inventory.dll</li><li>SPCAF.Metrics.dll</li><li>SPCAF.Rules.dll</li><li>SPCAF.Integration.CSSLint.dll</li><li>SPCAF.Integration.CSSLintRunner.exe</li><li>SPCAF.Integration.JSHint.dll</li><li>SPCAF.Integration.JSHintRunner.exe</li><li>SPCAF.Sdk.dll</li><li>SPCAF.Sdk.XmlSerializers.dll</li><li>log4net.config</li></ul><p><strong>Do not deploy the assemblies</strong></p><ul><li>Autofac.Portable.dll</li><li>De.TorstenMandelkow.MetroChart.dll</li><li>SPCAF.Client.Core.PortableInfrastructure</li><li>SPCAF.VSPackage</li><li>SPCAF.VSPackage.Common</li></ul></li><li><p>Also include the License.lic file with your license (can be found in users AppData directory)</p></li><li><p>Copy the assembly from folder “TeamBuildActivites” in the SPCAF installation directory to that folder in TFS</p></li><li><p>Copy the folder “RuleSets” to the folder in TFS</p></li></ol><p>You should end up as shown in the following screenshot:</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1.jpg alt><h3 id=configure-build-controller-to-load-the-spcaf-assemblies>Configure Build Controller to load the SPCAF Assemblies</h3><p>Now we need to tell the Build Controller that during a build the SPCAF assemblies should be loaded.</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2_huc80aab273182911241797e8abe54d8a6_92312_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2_huc80aab273182911241797e8abe54d8a6_92312_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2_huc80aab273182911241797e8abe54d8a6_92312_600x0_resize_q90_box.jpg 600w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2.jpg alt><h3 id=add-spcaf-build-activity-to-the-process-template>Add SPCAF Build Activity to the Process Template</h3><p>It is possible to manually edit the process template with a text editor. In this how-to you are going to use the designer in Visual Studio.</p><h4 id=add-build-activity-with-designer-in-visual-studio>Add Build Activity with Designer in Visual Studio</h4><p>If you don’t want to add the build activity to the process template in XML you can use a visual designer in Visual Studio.</p><ol><li><p>Make a copy of an existing Process Template e.g. DefaultTemplate.xaml in TFS an name it for instance DefaultTemplateSPCAF.xaml</p></li><li><p>Create a new project of type Class library in Visual Studio and delete the default created Class.cs</p></li><li><p>Add the copied Process template ‘DefaultTemplateSPCAF.xaml’ to the project via “Add Existing Item” and navigate to the folder with DefaultTemplateSPCAF.xaml. Important: Select “Add As Link” in the dialog to add only a link to the file.</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3.jpg alt></li><li><p>Add the necessary reference to the project:</p><ul><li>Microsoft.TeamFoundation.Build.Workflow.dll</li><li>Microsoft.TeamFoundation.VersionControl.Client.dll</li><li>Microsoft.TeamFoundation.VersionControl.Common.dll</li></ul></li><li><p>Add reference to SPCAF.BuildActivity.TFS2012 to the project from the previously created folder “CustomAssemblies”</p><p>See below the Visual Studio project with all references, the linked DefaultTemplateSPCAF.xaml</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4.jpg alt></li><li><p>Open the process template in designer.</p></li><li><p>Add the SPCAF build activity to the toolbox: Right click in toolbox and select “Choose items…”. In tab System.Activites Components select “Browse…” and select the assembly SPCAF.BuildActivity.TFS2012 from the folder “CustomAssemblies”. The Build Activity appear in the toolbox.</p></li><li><p>Because in TFS 2013 the default build process template is a little bit different we need to add a variable to store the path to the Binaries Directory. Open the tab “Variables”, add a variable named “BinariesDirectory” with the type “String”, you can leave the scope in its default setting.</p><img sizes="(min-width: 25em) 590px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC5_hu3e8aa1eb5ef701e1cf3b14bb029d5e10_14343_400x0_resize_box_2.png 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC5_hu3e8aa1eb5ef701e1cf3b14bb029d5e10_14343_500x0_resize_box_2.png 500w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC5.png alt></li><li><p>In the process template navigate to Compile, Test and Publish and open the try block. Drag a GetEnvironmentVariable activity below the “Get Impacted Tests”-activity. Set the activity arguments according to the table below:</p><table><thead><tr><th align=left>Argument</th><th align=left>Value</th></tr></thead><tbody><tr><td align=left>Name</td><td align=left>Microsoft.TeamFoundation.Build.Activities.Extensions.WellKnownEnvironmentVariables.BinariesDirectory</td></tr><tr><td align=left>DisplayName</td><td align=left>Get Binaries Folder</td></tr><tr><td align=left>Result</td><td align=left>BinariesDirectory</td></tr></tbody></table></li><li><p>Drag the SPCAF build activity below the Get Binaries Folder activity.</p><p>You should end up with the following setup:</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC6_hu2b274c75573e61a562cd8370e5e41330_3994_400x0_resize_box_2.png 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC6_hu2b274c75573e61a562cd8370e5e41330_3994_500x0_resize_box_2.png 500w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC6.png alt></li><li><p>Configure the SPCAF build activity to your needs (see parameters below).</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7.jpg alt></li><li><p>Save the process template and check in.</p></li></ol><h3 id=parameters-of-build-activity>Parameters of Build Activity</h3><p>The following parameters can be configured for the build activity.</p><table><thead><tr><th align=left>Argument</th><th align=left>Description</th><th align=left>Sample Value</th></tr></thead><tbody><tr><td align=left>DisplayName</td><td align=left>Required String. Title of activity, used in logfiles.</td><td align=left>“Run SharePoint Code Analysis SPCAF”</td></tr><tr><td align=left>SettingsFile</td><td align=left>Optional String. Name of settings file in folder “/RuleSets” or full path to a different ruleset file.</td><td></td></tr><tr><td align=left>TempFolder</td><td align=left>Optional String. Path to temp folder. If not set SPCAF uses a standard temp folder.</td><td></td></tr><tr><td align=left>FailBuildOnError</td><td align=left>Optional Boolean. Default FALSE. If TRUE the build fails if SPCAF detects errors.</td><td align=left>FALSE</td></tr><tr><td align=left>IgnoreExceptions</td><td align=left>Optional Boolean. Default TRUE. TRUE to ignore exceptions during analysis. Settings this value helps to ensure that the build finishes successfully also in case of exceptions.</td><td align=left>TRUE</td></tr><tr><td align=left>InputDirectory</td><td align=left>Required String. Path to WSP solutions. Can be a folder name or a list of files (separated by ‘;’).</td><td align=left>BinariesDirectory</td></tr><tr><td align=left>LogExceptionStack</td><td align=left>Optional Boolean. Default FALSE. In case of problems with SPCAF setting this value to TRUE adds more information to the logfile which describes the error in detail.</td><td align=left>FALSE</td></tr><tr><td align=left>OutputFilename</td><td align=left>Optional String. Defines the ouptput filename of the reports. Typically the output folder should be in the BinariesDirectory. After successful build the whole BinariesDirectory is copied to the DropLocation. Alternatively the DropLocation or any other folder can be used to save the results.</td><td align=left>System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\SPCAFResults.xml”)</td></tr><tr><td align=left>LogFile</td><td align=left>Optional String. Defines the path to the log file.</td><td align=left>System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\spcaf.log”)</td></tr><tr><td align=left>ReportGeneratorTypes</td><td align=left>Optional String. Defines which reports should be created</td><td align=left>“HTML;XML;DGML;DOCX” (DOCX is supported since version 4.5.2)</td></tr><tr><td align=left>TreatWarningsAsErrors</td><td align=left>Optional Boolean. Default FALSE. If TRUE all warnings will be evaluated as errors.</td><td align=left>FALSE</td></tr><tr><td align=left>ThrowExceptionOnError</td><td align=left>Optional Boolean. Default FALSE. If TRUE an exception will be throw in case of critical errors or errors.</td><td align=left>FALSE (Available since version 4.5.2)</td></tr><tr><td align=left>Verbosity</td><td align=left>Optional String. Detail level of output (e.g. minimal, default: normal).</td><td align=left>normal</td></tr></tbody></table><p>The build activity returns the following values after analysis. (Supported since version 4.5.2)</p><table><thead><tr><th align=left>Argument</th><th align=left>Description</th></tr></thead><tbody><tr><td align=left>CriticalErrors</td><td align=left>Integer. Contains the number of critical errors after analysis.</td></tr><tr><td align=left>Errors</td><td align=left>Integer. Contains the number of errors after analysis.</td></tr><tr><td align=left>CriticalWarnings</td><td align=left>Integer. Contains the number of critical warnings after analysis.</td></tr><tr><td align=left>Warnings</td><td align=left>Integer. Contains the number of warnings after analysis.</td></tr><tr><td align=left>Information</td><td align=left>Integer. Contains the number of information after analysis.</td></tr></tbody></table><h3 id=create-a-new-build-definition>Create a new Build Definition</h3><p>Now we can use the new process template in a new Build Definiiton</p><ol><li><p>Create a new Build Definition in TFS</p></li><li><p>In the build definition goto tab “Process” and select “New..” and “Select an existing XAML file” and choose the DefaultTemplateSPCAF.xaml</p></li><li><p>For building SharePoint projects a special setting is needed: Go in process tab to “3. Advanced” and change the parameter “MSBuild Arguments” to “/p:IsPackaging=true”. This ensure that during the build process the WSP files are created.</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8.jpg alt></li><li><p>Run a build with the new Build Definition. To check if SPCAF was configured correctly check the log. There you can find the output of the analysis.</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9.jpg alt></li><li><p>In case of found errors and warnings during analysis the result can be found in the Build Summary.</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10.jpg alt></li><li><p>Navigate to the DropLocation. There you should find the created SPCAF reports.</p><img sizes="(min-width: 25em) 720px, 100vw" srcset="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_400x0_resize_q90_box.jpg 400w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_500x0_resize_q90_box.jpg 500w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_600x0_resize_q90_box.jpg 600w
-, /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_720x0_resize_q90_box.jpg 720w" src=/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11.jpg alt></li></ol></div></main><footer><div>&copy; Joost Haneveer 2020
-&#183; <a href=https://choosealicense.com/licenses/mit/ target=_blank>MIT</a></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin=anonymous></script></body></html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.72.0" />
+
+  <title>How to run SPCAF v4 analysis during TeamBuild in TFS 2013 &middot; Joost&#39;s blog</title>
+
+  <meta name="description" content="" />
+
+  
+
+<meta itemprop="name" content="How to run SPCAF v4 analysis during TeamBuild in TFS 2013">
+<meta itemprop="description" content="Update October 15, 2014: This post is based on SPCAF version 4.">
+<meta itemprop="datePublished" content="2013-12-06T13:17:44&#43;00:00" />
+<meta itemprop="dateModified" content="2013-12-06T13:17:44&#43;00:00" />
+<meta itemprop="wordCount" content="1288">
+
+
+
+<meta itemprop="keywords" content="Build,SPCAF,TFS 2013," />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to run SPCAF v4 analysis during TeamBuild in TFS 2013"/>
+<meta name="twitter:description" content="Update October 15, 2014: This post is based on SPCAF version 4."/>
+
+
+<meta property="og:title" content="How to run SPCAF v4 analysis during TeamBuild in TFS 2013" />
+<meta property="og:description" content="Update October 15, 2014: This post is based on SPCAF version 4." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/" />
+<meta property="article:published_time" content="2013-12-06T13:17:44+00:00" />
+<meta property="article:modified_time" content="2013-12-06T13:17:44+00:00" />
+
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="/css/hyde.css">
+
+  
+
+
+  
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+      <div class="author-image">
+        <img src="https://www.gravatar.com/avatar/6fcb81b5de538fb939bc87beb56592d8?s=200&d=mp" class="img-circle img-headshot center" alt="Gravatar">
+      </div>
+      
+
+      <h1>Joost&#39;s blog</h1>
+
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://joosthaneveer.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/posts/">Posts</a>
+        </li><li>
+          <a href="/about/">About</a>
+        </li><li>
+          <a href="/categories/">Categories</a>
+        </li><li>
+          <a href="/tags/">Tags</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://www.linkedin.com/in/joosthaneveer" rel="me" title="Linkedin" target="_blank">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://github.com/joosthaneveer" rel="me" title="GitHub" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="https://twitter.com/joosthaneveer" rel="me" title="Twitter" target="_blank">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>How to run SPCAF v4 analysis during TeamBuild in TFS 2013</h1>
+
+  <div class="post-date">
+    <time datetime="2013-12-06T13:17:44Z">Dec 6, 2013</time> &middot; 7 min read
+  </div>
+
+  <p><strong>Update October 15, 2014:</strong> This post is based on SPCAF version 4.*, and is updated to include the <a href="http://www.spcaf.com/blog/v4-5-5-release-2014-03-20/">TFS Build Activity changes in SPCAF version 4.5.2</a>.</p>
+<p>If you are looking how to run SPCAF v5 during TeamBuild in TFS 2013, see <a href="http://joost.haneveer.nl/sharepoint/run-spcaf-analysis-teambuild/" title="How to run SPCAF v5 analysis during TeamBuild in TFS 2013">this</a> post.</p>
+<hr>
+<p><em>This how-to is based on the <a href="http://docs.spcaf.com/v4/SPCAF_OVERVIEW_660_HOWTORUNSPCAFINTEAMBUILD.html">SPCAF how-to written for TFS 2012</a>.</em></p>
+<p>SharePoint code analysis with <a href="http://www.spcaf.com">SPCAF</a> can also be executed during a TFS Team Build. This helps to ensure the correctness of the SharePoint code. During the Team Build all found errors and warnings are listed in the build result. Additionally the SPCAF reports can be generated and saved to the output directory.</p>
+<p>SPCAF supports the Team Build with the following products:</p>
+<ul>
+<li>TFS 2010</li>
+<li>TFS 2012</li>
+<li>TFS 2013 (with this how-to)</li>
+<li>Team Foundation services (TFS Online)</li>
+</ul>
+<p>To support TFS 2010 and TFS 2012 SPCAF comes with 2 different build activities which can be integrated into the workflow of a Team Build, depending on the version of TFS. The build activities can be found within the installation directory of SPFAC in subfolder “TeamBuildActivities”.</p>
+<ul>
+<li>SPCAF.BuildActivity.TFS2010.dll</li>
+<li>SPCAF.BuildActivity.TFS2012.dll (also used for TFS 2013)</li>
+</ul>
+<p><strong>Note</strong>: The build activities should not be copied directly into the installation folder of SPCAF because SPCAF searches during analysis within the installation folder for custom rules. As the activities depend on Team Build assemblies they cannot be loaded and SPCAF cannot execute.</p>
+<p><strong>Note</strong>: If you are not familiar with configuration of team builds in TFS please request somebody to help you.</p>
+<p>The following steps provide the general instructions for the Team Build. Some standard TFS configuration steps are skipped.</p>
+<h3 id="preparation">Preparation</h3>
+<p>To run SPCAF on the build server the SPCAF assemblies must be available on the build server. You don’t need to install SPCAF on the server!</p>
+<ol>
+<li>
+<p>Open Source Control of TFS and navigate to folder “BuildProcessTemplates” of your team project It is possible that this folder does not exist in your TFS 2013 team project. You can create it manually.</p>
+</li>
+<li>
+<p>Create a subfolder “CustomAssemblies” and check in</p>
+</li>
+<li>
+<p>Within this folder create a subfolder “SPCAF”</p>
+</li>
+<li>
+<p>Copy only the following assemblies from SPCAF installation directory to that folder:</p>
+<ul>
+<li>ICSharpCode.Decompiler.dll</li>
+<li>ICSharpCode.NRefactory.CSharp.dll</li>
+<li>ICSharpCode.NRefactory.dll</li>
+<li>Jurassic.dll</li>
+<li>log4net.dll</li>
+<li>Microsoft.Deployment.Compression.Cab.dll</li>
+<li>Microsoft.Deployment.Compression.dll</li>
+<li>Mono.Cecil.dll</li>
+<li>Mono.Cecil.Pdb.dll</li>
+<li>Mono.Cecil.Rocks.dll</li>
+<li>Spark.dll</li>
+<li>SPCAF.Dependencies.dll</li>
+<li>SPCAF.Engine.dll</li>
+<li>SPCAF.Inventory.dll</li>
+<li>SPCAF.Metrics.dll</li>
+<li>SPCAF.Rules.dll</li>
+<li>SPCAF.Integration.CSSLint.dll</li>
+<li>SPCAF.Integration.CSSLintRunner.exe</li>
+<li>SPCAF.Integration.JSHint.dll</li>
+<li>SPCAF.Integration.JSHintRunner.exe</li>
+<li>SPCAF.Sdk.dll</li>
+<li>SPCAF.Sdk.XmlSerializers.dll</li>
+<li>log4net.config</li>
+</ul>
+<p><strong>Do not deploy the assemblies</strong></p>
+<ul>
+<li>Autofac.Portable.dll</li>
+<li>De.TorstenMandelkow.MetroChart.dll</li>
+<li>SPCAF.Client.Core.PortableInfrastructure</li>
+<li>SPCAF.VSPackage</li>
+<li>SPCAF.VSPackage.Common</li>
+</ul>
+</li>
+<li>
+<p>Also include the License.lic file with your license (can be found in users AppData directory)</p>
+</li>
+<li>
+<p>Copy the assembly from folder “TeamBuildActivites” in the SPCAF installation directory to that folder in TFS</p>
+</li>
+<li>
+<p>Copy the folder “RuleSets” to the folder in TFS</p>
+</li>
+</ol>
+<p>You should end up as shown in the following screenshot:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1_hub41fbee3fde581691f87e37641fc0faa_144295_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC1.jpg" 
+  
+  alt="">
+<h3 id="configure-build-controller-to-load-the-spcaf-assemblies">Configure Build Controller to load the SPCAF Assemblies</h3>
+<p>Now we need to tell the Build Controller that during a build the SPCAF assemblies should be loaded.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2_huc80aab273182911241797e8abe54d8a6_92312_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2_huc80aab273182911241797e8abe54d8a6_92312_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2_huc80aab273182911241797e8abe54d8a6_92312_600x0_resize_q90_box.jpg 600w
+  
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC2.jpg" 
+  
+  alt="">
+<h3 id="add-spcaf-build-activity-to-the-process-template">Add SPCAF Build Activity to the Process Template</h3>
+<p>It is possible to manually edit the process template with a text editor. In this how-to you are going to use the designer in Visual Studio.</p>
+<h4 id="add-build-activity-with-designer-in-visual-studio">Add Build Activity with Designer in Visual Studio</h4>
+<p>If you don’t want to add the build activity to the process template in XML you can use a visual designer in Visual Studio.</p>
+<ol>
+<li>
+<p>Make a copy of an existing Process Template e.g. DefaultTemplate.xaml in TFS an name it for instance DefaultTemplateSPCAF.xaml</p>
+</li>
+<li>
+<p>Create a new project of type Class library in Visual Studio and delete the default created Class.cs</p>
+</li>
+<li>
+<p>Add the copied Process template ‘DefaultTemplateSPCAF.xaml’ to the project via “Add Existing Item” and navigate to the folder with DefaultTemplateSPCAF.xaml. Important: Select “Add As Link” in the dialog to add only a link to the file.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3_hufba723ab3af6f9f1afae6e57c9175409_94904_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC3.jpg" 
+  
+  alt="">
+</li>
+<li>
+<p>Add the necessary reference to the project:</p>
+<ul>
+<li>Microsoft.TeamFoundation.Build.Workflow.dll</li>
+<li>Microsoft.TeamFoundation.VersionControl.Client.dll</li>
+<li>Microsoft.TeamFoundation.VersionControl.Common.dll</li>
+</ul>
+</li>
+<li>
+<p>Add reference to SPCAF.BuildActivity.TFS2012 to the project from the previously created folder “CustomAssemblies”</p>
+<p>See below the Visual Studio project with all references, the linked DefaultTemplateSPCAF.xaml</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4_hu43b73a7f49f6d1330f7e181a328c712c_122010_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC4.jpg" 
+  
+  alt="">
+</li>
+<li>
+<p>Open the process template in designer.</p>
+</li>
+<li>
+<p>Add the SPCAF build activity to the toolbox: Right click in toolbox and select “Choose items…”. In tab System.Activites Components select “Browse…” and select the assembly SPCAF.BuildActivity.TFS2012 from the folder “CustomAssemblies”. The Build Activity appear in the toolbox.</p>
+</li>
+<li>
+<p>Because in TFS 2013 the default build process template is a little bit different we need to add a variable to store the path to the Binaries Directory. Open the tab “Variables”, add a variable named “BinariesDirectory” with the type “String”, you can leave the scope in its default setting.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes='(min-width: 25em) 590px, 100vw'
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC5_hu3e8aa1eb5ef701e1cf3b14bb029d5e10_14343_400x0_resize_box_2.png 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC5_hu3e8aa1eb5ef701e1cf3b14bb029d5e10_14343_500x0_resize_box_2.png 500w
+  
+  
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC5.png" 
+  
+  alt="">
+</li>
+<li>
+<p>In the process template navigate to Compile, Test and Publish and open the try block. Drag a GetEnvironmentVariable<!-- raw HTML omitted --> activity below the “Get Impacted Tests”-activity. Set the activity arguments according to the table below:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Argument</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Name</td>
+<td align="left">Microsoft.TeamFoundation.Build.Activities.Extensions.WellKnownEnvironmentVariables.BinariesDirectory</td>
+</tr>
+<tr>
+<td align="left">DisplayName</td>
+<td align="left">Get Binaries Folder</td>
+</tr>
+<tr>
+<td align="left">Result</td>
+<td align="left">BinariesDirectory</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Drag the SPCAF build activity below the Get Binaries Folder activity.</p>
+<p>You should end up with the following setup:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC6_hu2b274c75573e61a562cd8370e5e41330_3994_400x0_resize_box_2.png 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC6_hu2b274c75573e61a562cd8370e5e41330_3994_500x0_resize_box_2.png 500w
+  
+  
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC6.png" 
+  
+  alt="">
+</li>
+<li>
+<p>Configure the SPCAF build activity to your needs (see parameters below).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7_hu914df8e114dac61af83fa70e94912f73_56354_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC7.jpg" 
+  
+  alt="">
+</li>
+<li>
+<p>Save the process template and check in.</p>
+</li>
+</ol>
+<h3 id="parameters-of-build-activity">Parameters of Build Activity</h3>
+<p>The following parameters can be configured for the build activity.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Argument</th>
+<th align="left">Description</th>
+<th align="left">Sample Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">DisplayName</td>
+<td align="left">Required String. Title of activity, used in logfiles.</td>
+<td align="left">“Run SharePoint Code Analysis SPCAF”</td>
+</tr>
+<tr>
+<td align="left">SettingsFile</td>
+<td align="left">Optional String. Name of settings file in folder “/RuleSets” or full path to a different ruleset file.</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">TempFolder</td>
+<td align="left">Optional String. Path to temp folder. If not set SPCAF uses a standard temp folder.</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">FailBuildOnError</td>
+<td align="left">Optional Boolean. Default FALSE. If TRUE the build fails if SPCAF detects errors.</td>
+<td align="left">FALSE</td>
+</tr>
+<tr>
+<td align="left">IgnoreExceptions</td>
+<td align="left">Optional Boolean. Default TRUE. TRUE to ignore exceptions during analysis. Settings this value helps to ensure that the build finishes successfully also in case of exceptions.</td>
+<td align="left">TRUE</td>
+</tr>
+<tr>
+<td align="left">InputDirectory</td>
+<td align="left">Required String. Path to WSP solutions. Can be a folder name or a list of files (separated by ‘;’).</td>
+<td align="left">BinariesDirectory</td>
+</tr>
+<tr>
+<td align="left">LogExceptionStack</td>
+<td align="left">Optional Boolean. Default FALSE. In case of problems with SPCAF setting this value to TRUE adds more information to the logfile which describes the error in detail.</td>
+<td align="left">FALSE</td>
+</tr>
+<tr>
+<td align="left">OutputFilename</td>
+<td align="left">Optional String. Defines the ouptput filename of the reports. Typically the output folder should be in the BinariesDirectory. After successful build the whole BinariesDirectory is copied to the DropLocation. Alternatively the DropLocation or any other folder can be used to save the results.</td>
+<td align="left">System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\SPCAFResults.xml”)</td>
+</tr>
+<tr>
+<td align="left">LogFile</td>
+<td align="left">Optional String. Defines the path to the log file.</td>
+<td align="left">System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\spcaf.log”)</td>
+</tr>
+<tr>
+<td align="left">ReportGeneratorTypes</td>
+<td align="left">Optional String. Defines which reports should be created</td>
+<td align="left">“HTML;XML;DGML;DOCX” (DOCX is supported since version 4.5.2)</td>
+</tr>
+<tr>
+<td align="left">TreatWarningsAsErrors</td>
+<td align="left">Optional Boolean. Default FALSE. If TRUE all warnings will be evaluated as errors.</td>
+<td align="left">FALSE</td>
+</tr>
+<tr>
+<td align="left">ThrowExceptionOnError</td>
+<td align="left">Optional Boolean. Default FALSE. If TRUE an exception will be throw in case of critical errors or errors.</td>
+<td align="left">FALSE (Available since version 4.5.2)</td>
+</tr>
+<tr>
+<td align="left">Verbosity</td>
+<td align="left">Optional String. Detail level of output (e.g. minimal, default: normal).</td>
+<td align="left">normal</td>
+</tr>
+</tbody>
+</table>
+<p>The build activity returns the following values after analysis. (Supported since version 4.5.2)</p>
+<table>
+<thead>
+<tr>
+<th align="left">Argument</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">CriticalErrors</td>
+<td align="left">Integer. Contains the number of critical errors after analysis.</td>
+</tr>
+<tr>
+<td align="left">Errors</td>
+<td align="left">Integer. Contains the number of errors after analysis.</td>
+</tr>
+<tr>
+<td align="left">CriticalWarnings</td>
+<td align="left">Integer. Contains the number of critical warnings after analysis.</td>
+</tr>
+<tr>
+<td align="left">Warnings</td>
+<td align="left">Integer. Contains the number of warnings after analysis.</td>
+</tr>
+<tr>
+<td align="left">Information</td>
+<td align="left">Integer. Contains the number of information after analysis.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="create-a-new-build-definition">Create a new Build Definition</h3>
+<p>Now we can use the new process template in a new Build Definiiton</p>
+<ol>
+<li>
+<p>Create a new Build Definition in TFS</p>
+</li>
+<li>
+<p>In the build definition goto tab “Process” and select “New..” and “Select an existing XAML file” and choose the DefaultTemplateSPCAF.xaml</p>
+</li>
+<li>
+<p>For building SharePoint projects a special setting is needed: Go in process tab to “3. Advanced” and change the parameter “MSBuild Arguments” to “/p:IsPackaging=true”. This ensure that during the build process the WSP files are created.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8_hue73db6f83614e4825ee7eb867434103c_118815_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC8.jpg" 
+  
+  alt="">
+</li>
+<li>
+<p>Run a build with the new Build Definition. To check if SPCAF was configured correctly check the log. There you can find the output of the analysis.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9_huacc2ab2e567830fd5fc0af0a4bd77839_107805_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC9.jpg" 
+  
+  alt="">
+</li>
+<li>
+<p>In case of found errors and warnings during analysis the result can be found in the Build Summary.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10_hue615dfaf54cd09bcb3809b892bab3c1d_146079_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC10.jpg" 
+  
+  alt="">
+</li>
+<li>
+<p>Navigate to the DropLocation. There you should find the created SPCAF reports.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img 
+  sizes="(min-width: 25em) 720px, 100vw"
+  srcset='
+  
+    /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_400x0_resize_q90_box.jpg 400w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_500x0_resize_q90_box.jpg 500w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_600x0_resize_q90_box.jpg 600w
+  
+  
+    , /sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11_hu94f0bc8d29bfae9a4517feb1ae82a39a_166604_720x0_resize_q90_box.jpg 720w 
+  '
+  
+    src="/sharepoint/run-spcaf-analysis-teambuild-tfs-2013/120613_1318_HowtorunSPC11.jpg" 
+  
+  alt="">
+</li>
+</ol>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div>
+    &copy; Joost Haneveer 2020
+
+    &middot; <a href="https://choosealicense.com/licenses/mit/" target="_blank">MIT</a>
+
+    
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  
+
+  
+</body>
+</html>
