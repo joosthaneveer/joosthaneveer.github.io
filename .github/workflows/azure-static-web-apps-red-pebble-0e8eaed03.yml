@@ -20,14 +20,15 @@ jobs:
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2.4.11
-        with:
-          hugo-version: "latest"  # Hugo version: latest OR x.y.z
-          # extended: true
+      #  Disabled the next two steps because running on the repo where the published version lives
+      #- name: Setup Hugo
+      #  uses: peaceiris/actions-hugo@v2.4.11
+      #  with:
+      #    hugo-version: "latest"  # Hugo version: latest OR x.y.z
+      #    # extended: true
 
-      - name: Build
-        run: hugo
+      #- name: Build
+      #  run: hugo
 
       - name: Build And Deploy
         id: builddeploy
