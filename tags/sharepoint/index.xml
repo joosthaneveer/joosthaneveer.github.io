@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SharePoint on Joost's blog</title><link>https://joosthaneveer.github.io/tags/sharepoint/</link><description>Recent content in SharePoint on Joost's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Jan 2012 08:44:19 +0000</lastBuildDate><atom:link href="https://joosthaneveer.github.io/tags/sharepoint/index.xml" rel="self" type="application/rss+xml"/><item><title>Modify the groups listed when granting permissions to a site</title><link>https://joosthaneveer.github.io/sharepoint/6/</link><pubDate>Wed, 25 Jan 2012 08:44:19 +0000</pubDate><guid>https://joosthaneveer.github.io/sharepoint/6/</guid><description>When you click the button ‘Grant Permissions’ in the Permission screen of a site you always get the option to insert a user inside a SharePoint group.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SharePoint on Joost&#39;s blog</title>
+    <link>https://joosthaneveer.github.io/tags/sharepoint/</link>
+    <description>Recent content in SharePoint on Joost&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 25 Jan 2012 08:44:19 +0000</lastBuildDate>
+    
+	<atom:link href="https://joosthaneveer.github.io/tags/sharepoint/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Modify the groups listed when granting permissions to a site</title>
+      <link>https://joosthaneveer.github.io/sharepoint/6/</link>
+      <pubDate>Wed, 25 Jan 2012 08:44:19 +0000</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/sharepoint/6/</guid>
+      <description>When you click the button ‘Grant Permissions’ in the Permission screen of a site you always get the option to insert a user inside a SharePoint group.</description>
+    </item>
+    
+  </channel>
+</rss>
