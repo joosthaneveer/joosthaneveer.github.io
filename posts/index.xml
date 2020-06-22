@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Joost&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Oct 2014 06:22:23 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2020 15:59:23 +0200</lastBuildDate>
     
 	<atom:link href="https://joosthaneveer.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bye bye Wordpress, Hello Hugo</title>
+      <link>https://joosthaneveer.github.io/hugo/bye-bye-wordpress-hello-hugo/</link>
+      <pubDate>Mon, 22 Jun 2020 15:59:23 +0200</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/hugo/bye-bye-wordpress-hello-hugo/</guid>
+      <description>This site has been running on Wordpress ever since it conception back in 2012.</description>
+    </item>
     
     <item>
       <title>How to run SPCAF v5 analysis during TeamBuild in TFS 2013</title>

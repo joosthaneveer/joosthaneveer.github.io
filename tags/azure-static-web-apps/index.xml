@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure Static Web Apps on Joost&#39;s blog</title>
+    <link>https://joosthaneveer.github.io/tags/azure-static-web-apps/</link>
+    <description>Recent content in Azure Static Web Apps on Joost&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 22 Jun 2020 15:59:23 +0200</lastBuildDate>
+    
+	<atom:link href="https://joosthaneveer.github.io/tags/azure-static-web-apps/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bye bye Wordpress, Hello Hugo</title>
+      <link>https://joosthaneveer.github.io/hugo/bye-bye-wordpress-hello-hugo/</link>
+      <pubDate>Mon, 22 Jun 2020 15:59:23 +0200</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/hugo/bye-bye-wordpress-hello-hugo/</guid>
+      <description>This site has been running on Wordpress ever since it conception back in 2012.</description>
+    </item>
+    
+  </channel>
+</rss>
