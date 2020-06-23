@@ -17,7 +17,7 @@
       <pubDate>Mon, 28 Oct 2013 10:32:19 +0000</pubDate>
       
       <guid>https://joosthaneveer.github.io/asp-net/display-mvc-5-web-site-in-an-iframe/</guid>
-      <description>ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application.</description>
+      <description>ASP.Net MVC 5 automatically adds a HTTP header called X-Frame-Options with the value SAMEORIGIN to your web application. That header is intended to prevent click jacking and makes sure your site can’t be loaded in an IFrame.</description>
     </item>
     
   </channel>
