@@ -1,5 +1,10 @@
 {
   "routes": [
+    {
+      "route": "category/tfs/tfs-2013/",
+      "serve": "sharepoint/run-spcaf-analysis-teambuild-tfs-2013/",
+      "statusCode": 301
+    }
   ],
   "platformErrorOverrides": [
     {
