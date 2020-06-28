@@ -6,10 +6,19 @@
     <description>Recent content in Azure on Joost&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2020 15:59:23 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 08:48:23 +0200</lastBuildDate>
     
 	<atom:link href="https://joosthaneveer.github.io/categories/azure/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Automatic staging environment creation in Azure Static Web Apps</title>
+      <link>https://joosthaneveer.github.io/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/</link>
+      <pubDate>Sun, 28 Jun 2020 08:48:23 +0200</pubDate>
+      
+      <guid>https://joosthaneveer.github.io/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/</guid>
+      <description>Everyone knows that publishing code directly to Production is not the best idea. Azure Static Web Apps offer the ability to automatically create a fully-functional staging environment for you when you want to publish new code.</description>
+    </item>
     
     <item>
       <title>Bye bye Wordpress, Hello Hugo</title>

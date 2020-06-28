@@ -2,18 +2,18 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>Windows Server 2012 R2 - Joost&#39;s blog</title>
+<title>Joost&#39;s blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.73.0" /><meta itemprop="name" content="Windows Server 2012 R2">
-<meta itemprop="description" content=""><meta property="og:title" content="Windows Server 2012 R2" />
+<meta name="generator" content="Hugo 0.73.0" /><meta itemprop="name" content="Joost&#39;s blog">
+<meta itemprop="description" content=""><meta property="og:title" content="Joost&#39;s blog" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://joosthaneveer.github.io/tags/windows-server-2012-r2/" />
-<meta property="og:updated_time" content="2013-11-26T10:30:26+00:00" />
+<meta property="og:url" content="https://joosthaneveer.github.io/" />
+<meta property="og:updated_time" content="2020-06-28T08:48:23+02:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Windows Server 2012 R2"/>
+<meta name="twitter:title" content="Joost&#39;s blog"/>
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@joosthaneveer"/>
 <link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css">
@@ -22,6 +22,53 @@
   <body>
     
 
+  <div id="theme-message" style="background-color:#3c3b3b;color:#f4f4f4;margin:auto auto;padding:.25em 2em;width:75%;">
+    <p style="text-align:center;">This message, related to the development of the theme, only displays on the
+      <code>localhost</code> homepage to notify you of any important theme changes.</p>
+      <hr>
+      <h5 style="color:#f4f4f4;text-align:center;"><i class="fas fa-exclamation-triangle"></i>Version 1.1.0 - May 18, 2020<i class="fas fa-exclamation-triangle"></i></h5>
+    <p>With this version, the theme has fully implemented <strong>static search</strong> using
+<code>lunr.js</code>. That being said, a few modifications were necessary to implement this
+feature.</p>
+<p>To utilize this, or future version of <em>Hugo Future Imperfect Slim</em>, please make
+the following changes:</p>
+<ol>
+<li>Add the following to your <code>config.toml</code> before <code>[params]</code>:</li>
+</ol>
+<pre><code>...
+disableLanguages = [&quot;&quot;]
+
+[outputs]
+    home = [&quot;html&quot;, &quot;json&quot;]
+
+[params]
+...
+</code></pre><ol start="2">
+<li>
+<p>Remove the underscore from all <code>about</code> and <code>contact</code> page file names:
+<code>_index.md --&gt; index.md</code></p>
+</li>
+<li>
+<p>Add <code>layout = &quot;about&quot;</code> or <code>layout = &quot;contact&quot;</code> to all of the files you just
+just adjusted the file names for.</p>
+</li>
+</ol>
+<p>While I realize this is inconvenient, I hope that it is worth it to you in the
+long run. Thanks for using the theme, and feel free to submit issues as needed.</p>
+
+    <div style="text-align:center;">
+      <button onclick="removeBox()" class="button" style="color:#f4f4f4;margin-bottom:1em;">Close Notification Until Next Update</button>
+    </div>
+    <script>
+      if (window.location.href.indexOf('localhost:') < 1 || window.localStorage.getItem('HFIS-version') == '1.1.0') {
+        document.getElementsByTagName("body")[0].removeChild(document.getElementById("theme-message"));
+      }
+      function removeBox() {
+        window.localStorage.setItem('HFIS-version', '1.1.0');
+        document.getElementsByTagName("body")[0].removeChild(document.getElementById("theme-message"));
+      }
+    </script>
+  </div>
 <header id="site-header">
   <nav id="site-nav">
     <h1 class="nav-title">
@@ -74,25 +121,25 @@
 
   
     
-    <a href="//twitter.com/share?text=Windows%20Server%202012%20R2&amp;url=https%3a%2f%2fjoosthaneveer.github.io%2ftags%2fwindows-server-2012-r2%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+    <a href="//twitter.com/share?text=Joost%27s%20blog&amp;url=https%3a%2f%2fjoosthaneveer.github.io%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
         <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoosthaneveer.github.io%2ftags%2fwindows-server-2012-r2%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fjoosthaneveer.github.io%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
         <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoosthaneveer.github.io%2ftags%2fwindows-server-2012-r2%2f&amp;title=Windows%20Server%202012%20R2" target="_blank" rel="noopener" class="nav share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fjoosthaneveer.github.io%2f&amp;title=Joost%27s%20blog" target="_blank" rel="noopener" class="nav share-btn linkedin">
             <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
           </a>
   
 
   
-        <a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fjoosthaneveer.github.io%2ftags%2fwindows-server-2012-r2%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fjoosthaneveer.github.io%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -115,8 +162,6 @@
     <footer>
       <ul class="socnet-icons">
         
-    <li><a href="/tags/windows-server-2012-r2/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/joosthaneveer" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 
@@ -173,13 +218,13 @@
   <header>
   <div class="title">
     
-      <h2><a href="/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/">Windows Server 2012 R2 install on HP MicroServer N40L fails</a></h2>
+      <h2><a href="/sharepoint/6/">Modify the groups listed when granting permissions to a site</a></h2>
     
     
   </div>
   <div class="meta">
-    <time class="published" datetime="2013-11-26 10:30:26 &#43;0000 UTC">
-      November 26, 2013
+    <time class="published" datetime="2012-01-25 08:44:19 &#43;0000 UTC">
+      January 25, 2012
     </time>
     <span class="author">Joost</span>
     
@@ -191,16 +236,16 @@
   
 
   
-  <p>This weekend I planned to install Windows Server 2012 R2 Essentials on my HP ProLiant MicroServer N40L to replace my WHS 2011 installation.</p>
+  <p>When you click the button ‘Grant Permissions’ in the Permission screen of a site you always get the option to insert a user inside a SharePoint group. Most of the time there are some groups listed that are not applicable. But we can do something about that.</p>
   <footer>
-    <a href="/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/" class="button big">Read more</a>
+    <a href="/sharepoint/6/" class="button big">Read more</a>
     <ul class="stats">
   <li class="categories">
     <ul>
     
       
         
-          <li><a class="article-terms-link" href="/categories/windows-server-2012-r2/">Windows Server 2012 R2</a></li>
+          <li><a class="article-terms-link" href="/categories/sharepoint/">SharePoint</a></li>
         
       
     
@@ -211,17 +256,11 @@
     
       
         
-          <li><a class="article-terms-link" href="/tags/bios/">BIOS</a></li>
+          <li><a class="article-terms-link" href="/tags/groups/">Groups</a></li>
         
-          <li><a class="article-terms-link" href="/tags/installation/">Installation</a></li>
+          <li><a class="article-terms-link" href="/tags/permissions/">Permissions</a></li>
         
-          <li><a class="article-terms-link" href="/tags/microserver/">MicroServer</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/nic/">NIC</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/windows-2012-r2-essentials/">Windows 2012 R2 Essentials</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/windows-server-2012-r2/">Windows Server 2012 R2</a></li>
+          <li><a class="article-terms-link" href="/tags/sharepoint-2010/">SharePoint 2010</a></li>
         
       
     
@@ -235,6 +274,8 @@
   
   
 <div class="pagination">
+  
+    <a href="/page/2/" class="button"><div class="previous"><div>Previous</div></div></a>
   
   
 </div>
@@ -386,8 +427,6 @@
   
       <ul class="socnet-icons">
         
-    <li><a href="/tags/windows-server-2012-r2/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fas fa-rss"></a></li>
-
 
         <li><a href="//github.com/joosthaneveer" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
 

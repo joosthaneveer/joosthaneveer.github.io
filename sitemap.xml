@@ -3,13 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://joosthaneveer.github.io/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/</loc>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://joosthaneveer.github.io/categories/azure/</loc>
-    <lastmod>2020-06-22T15:59:23+02:00</lastmod>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://joosthaneveer.github.io/tags/azure-static-web-apps/</loc>
-    <lastmod>2020-06-22T15:59:23+02:00</lastmod>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joosthaneveer.github.io/categories/</loc>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joosthaneveer.github.io/tags/github-actions/</loc>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joosthaneveer.github.io/</loc>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joosthaneveer.github.io/posts/</loc>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joosthaneveer.github.io/tags/</loc>
+    <lastmod>2020-06-28T08:48:23+02:00</lastmod>
   </url>
   
   <url>
@@ -18,27 +48,7 @@
   </url>
   
   <url>
-    <loc>https://joosthaneveer.github.io/categories/</loc>
-    <lastmod>2020-06-22T15:59:23+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://joosthaneveer.github.io/categories/hugo/</loc>
-    <lastmod>2020-06-22T15:59:23+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joosthaneveer.github.io/</loc>
-    <lastmod>2020-06-22T15:59:23+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joosthaneveer.github.io/posts/</loc>
-    <lastmod>2020-06-22T15:59:23+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joosthaneveer.github.io/tags/</loc>
     <lastmod>2020-06-22T15:59:23+02:00</lastmod>
   </url>
   
