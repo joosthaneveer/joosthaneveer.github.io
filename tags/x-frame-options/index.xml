@@ -6,11 +6,7 @@
     <description>Recent content in x-frame-options on Joost&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 28 Oct 2013 10:32:19 +0000</lastBuildDate>
-    
-	<atom:link href="https://joosthaneveer.github.io/tags/x-frame-options/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 28 Oct 2013 10:32:19 +0000</lastBuildDate><atom:link href="https://joosthaneveer.github.io/tags/x-frame-options/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Display MVC 5 web site in an IFrame</title>
       <link>https://joosthaneveer.github.io/asp-net/display-mvc-5-web-site-in-an-iframe/</link>

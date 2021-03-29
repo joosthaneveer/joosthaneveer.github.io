@@ -6,24 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.73.0" /><meta itemprop="name" content="How to run SPCAF v5 analysis during TeamBuild in TFS 2013">
+<meta name="generator" content="Hugo 0.82.0" /><meta itemprop="name" content="How to run SPCAF v5 analysis during TeamBuild in TFS 2013">
 <meta itemprop="description" content="This how-to is based on the SPCAF how-to written for TFS 2012.
-If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this post.">
-<meta itemprop="datePublished" content="2014-10-16T06:22:23&#43;00:00" />
+If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this post."><meta itemprop="datePublished" content="2014-10-16T06:22:23&#43;00:00" />
 <meta itemprop="dateModified" content="2014-10-16T06:22:23&#43;00:00" />
-<meta itemprop="wordCount" content="1307">
-<meta itemprop="image" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/120613_1318_HowtorunSPC9.jpg">
-
-
-
+<meta itemprop="wordCount" content="1307"><meta itemprop="image" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/120613_1318_HowtorunSPC9.jpg">
 <meta itemprop="keywords" content="Build,SPCAF,TFS 2013," /><meta property="og:title" content="How to run SPCAF v5 analysis during TeamBuild in TFS 2013" />
 <meta property="og:description" content="This how-to is based on the SPCAF how-to written for TFS 2012.
 If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this post." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/" />
-<meta property="og:image" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/120613_1318_HowtorunSPC9.jpg" />
-<meta property="article:published_time" content="2014-10-16T06:22:23+00:00" />
-<meta property="article:modified_time" content="2014-10-16T06:22:23+00:00" />
+<meta property="og:url" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/" /><meta property="og:image" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/120613_1318_HowtorunSPC9.jpg" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2014-10-16T06:22:23&#43;00:00" />
+<meta property="article:modified_time" content="2014-10-16T06:22:23&#43;00:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://joosthaneveer.github.io/sharepoint/run-spcaf-analysis-teambuild/120613_1318_HowtorunSPC9.jpg"/>
 
@@ -31,7 +26,7 @@ If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this po
 <meta name="twitter:description" content="This how-to is based on the SPCAF how-to written for TFS 2012.
 If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this post."/>
 <meta name="twitter:site" content="@joosthaneveer"/>
-<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css">
+<link rel="stylesheet" href="/css/bundle.min.a1c1099dbf5505fd5a181982fc757a0ee5b60c1ef4a779c2d74ab646612c8e89.css" integrity="sha256-ocEJnb9VBf1aGBmC/HV6DuW2DB70p3nC10q2RmEsjok="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -383,22 +378,22 @@ If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this po
 <table>
 <thead>
 <tr>
-<th align="left">Argument</th>
-<th align="left">Value</th>
+<th style="text-align:left">Argument</th>
+<th style="text-align:left">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">Name</td>
-<td align="left">Microsoft.TeamFoundation.Build.Activities.Extensions.WellKnownEnvironmentVariables.BinariesDirectory</td>
+<td style="text-align:left">Name</td>
+<td style="text-align:left">Microsoft.TeamFoundation.Build.Activities.Extensions.WellKnownEnvironmentVariables.BinariesDirectory</td>
 </tr>
 <tr>
-<td align="left">DisplayName</td>
-<td align="left">Get Binaries Folder</td>
+<td style="text-align:left">DisplayName</td>
+<td style="text-align:left">Get Binaries Folder</td>
 </tr>
 <tr>
-<td align="left">Result</td>
-<td align="left">BinariesDirectory</td>
+<td style="text-align:left">Result</td>
+<td style="text-align:left">BinariesDirectory</td>
 </tr>
 </tbody>
 </table>
@@ -425,81 +420,81 @@ If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this po
 <table>
 <thead>
 <tr>
-<th align="left">Argument</th>
-<th align="left">Description</th>
-<th align="left">Sample Value</th>
+<th style="text-align:left">Argument</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Sample Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">DisplayName</td>
-<td align="left">Required String. Title of activity, used in logfiles.</td>
-<td align="left">“Run SharePoint Code Analysis SPCAF”</td>
+<td style="text-align:left">DisplayName</td>
+<td style="text-align:left">Required String. Title of activity, used in logfiles.</td>
+<td style="text-align:left">“Run SharePoint Code Analysis SPCAF”</td>
 </tr>
 <tr>
-<td align="left">SettingsFile</td>
-<td align="left">Optional String. Name of settings file in folder “/RuleSets” or full path to a different ruleset file.</td>
+<td style="text-align:left">SettingsFile</td>
+<td style="text-align:left">Optional String. Name of settings file in folder “/RuleSets” or full path to a different ruleset file.</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">TempFolder</td>
-<td align="left">Optional String. Path to temp folder. If not set SPCAF uses a standard temp folder.</td>
+<td style="text-align:left">TempFolder</td>
+<td style="text-align:left">Optional String. Path to temp folder. If not set SPCAF uses a standard temp folder.</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">FailBuildOnError</td>
-<td align="left">Optional Boolean. Default FALSE. If TRUE the build fails if SPCAF detects errors.</td>
-<td align="left">FALSE</td>
+<td style="text-align:left">FailBuildOnError</td>
+<td style="text-align:left">Optional Boolean. Default FALSE. If TRUE the build fails if SPCAF detects errors.</td>
+<td style="text-align:left">FALSE</td>
 </tr>
 <tr>
-<td align="left">IgnoreExceptions</td>
-<td align="left">Optional Boolean. Default TRUE. TRUE to ignore exceptions during analysis. Settings this value helps to ensure that the build finishes successfully also in case of exceptions.</td>
-<td align="left">TRUE</td>
+<td style="text-align:left">IgnoreExceptions</td>
+<td style="text-align:left">Optional Boolean. Default TRUE. TRUE to ignore exceptions during analysis. Settings this value helps to ensure that the build finishes successfully also in case of exceptions.</td>
+<td style="text-align:left">TRUE</td>
 </tr>
 <tr>
-<td align="left">InputDirectory</td>
-<td align="left">Required String. Path to WSP solutions. Can be a folder name or a list of files (separated by ‘;’).</td>
-<td align="left">BinariesDirectory</td>
+<td style="text-align:left">InputDirectory</td>
+<td style="text-align:left">Required String. Path to WSP solutions. Can be a folder name or a list of files (separated by ‘;’).</td>
+<td style="text-align:left">BinariesDirectory</td>
 </tr>
 <tr>
-<td align="left">LogExceptionStack</td>
-<td align="left">Optional Boolean. Default FALSE. In case of problems with SPCAF setting this value to TRUE adds more information to the logfile which describes the error in detail.</td>
-<td align="left">FALSE</td>
+<td style="text-align:left">LogExceptionStack</td>
+<td style="text-align:left">Optional Boolean. Default FALSE. In case of problems with SPCAF setting this value to TRUE adds more information to the logfile which describes the error in detail.</td>
+<td style="text-align:left">FALSE</td>
 </tr>
 <tr>
-<td align="left">OutputFilename</td>
-<td align="left">Optional String. Defines the ouptput filename of the reports. Typically the output folder should be in the BinariesDirectory. After successful build the whole BinariesDirectory is copied to the DropLocation. Alternatively the DropLocation or any other folder can be used to save the results.</td>
-<td align="left">System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\SPCAFResults.xml”)</td>
+<td style="text-align:left">OutputFilename</td>
+<td style="text-align:left">Optional String. Defines the ouptput filename of the reports. Typically the output folder should be in the BinariesDirectory. After successful build the whole BinariesDirectory is copied to the DropLocation. Alternatively the DropLocation or any other folder can be used to save the results.</td>
+<td style="text-align:left">System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\SPCAFResults.xml”)</td>
 </tr>
 <tr>
-<td align="left">LogFile</td>
-<td align="left">Optional String. Defines the path to the log file.</td>
-<td align="left">System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\spcaf.log”)</td>
+<td style="text-align:left">LogFile</td>
+<td style="text-align:left">Optional String. Defines the path to the log file.</td>
+<td style="text-align:left">System.IO.Path.Combine(BinariesDirectory, “SPCAFResults\spcaf.log”)</td>
 </tr>
 <tr>
-<td align="left">ReportGeneratorTypes</td>
-<td align="left">Optional String. Defines which reports should be created</td>
-<td align="left">“HTML;XML;DGML;DOCX;PDF”</td>
+<td style="text-align:left">ReportGeneratorTypes</td>
+<td style="text-align:left">Optional String. Defines which reports should be created</td>
+<td style="text-align:left">“HTML;XML;DGML;DOCX;PDF”</td>
 </tr>
 <tr>
-<td align="left">TreatWarningsAsErrors</td>
-<td align="left">Optional Boolean. Default FALSE. If TRUE all warnings will be evaluated as errors.</td>
-<td align="left">FALSE</td>
+<td style="text-align:left">TreatWarningsAsErrors</td>
+<td style="text-align:left">Optional Boolean. Default FALSE. If TRUE all warnings will be evaluated as errors.</td>
+<td style="text-align:left">FALSE</td>
 </tr>
 <tr>
-<td align="left">ThrowExceptionOnError</td>
-<td align="left">Optional Boolean. Default FALSE. If TRUE an exception will be throw in case of critical errors or errors.</td>
-<td align="left">FALSE (Available since version 4.5.2)</td>
+<td style="text-align:left">ThrowExceptionOnError</td>
+<td style="text-align:left">Optional Boolean. Default FALSE. If TRUE an exception will be throw in case of critical errors or errors.</td>
+<td style="text-align:left">FALSE (Available since version 4.5.2)</td>
 </tr>
 <tr>
-<td align="left">Verbosity</td>
-<td align="left">Optional String. Detail level of output (e.g. minimal, default: normal).</td>
-<td align="left">normal</td>
+<td style="text-align:left">Verbosity</td>
+<td style="text-align:left">Optional String. Detail level of output (e.g. minimal, default: normal).</td>
+<td style="text-align:left">normal</td>
 </tr>
 <tr>
-<td align="left">SkipProjectCreation</td>
-<td align="left">Optional Boolean. Default FALSE. If TRUE no project (.spcaf) file is created as output of the analysis.</td>
-<td align="left">FALSE</td>
+<td style="text-align:left">SkipProjectCreation</td>
+<td style="text-align:left">Optional Boolean. Default FALSE. If TRUE no project (.spcaf) file is created as output of the analysis.</td>
+<td style="text-align:left">FALSE</td>
 </tr>
 </tbody>
 </table>
@@ -507,30 +502,30 @@ If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this po
 <table>
 <thead>
 <tr>
-<th align="left">Argument</th>
-<th align="left">Description</th>
+<th style="text-align:left">Argument</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">CriticalErrors</td>
-<td align="left">Integer. Contains the number of critical errors after analysis.</td>
+<td style="text-align:left">CriticalErrors</td>
+<td style="text-align:left">Integer. Contains the number of critical errors after analysis.</td>
 </tr>
 <tr>
-<td align="left">Errors</td>
-<td align="left">Integer. Contains the number of errors after analysis.</td>
+<td style="text-align:left">Errors</td>
+<td style="text-align:left">Integer. Contains the number of errors after analysis.</td>
 </tr>
 <tr>
-<td align="left">CriticalWarnings</td>
-<td align="left">Integer. Contains the number of critical warnings after analysis.</td>
+<td style="text-align:left">CriticalWarnings</td>
+<td style="text-align:left">Integer. Contains the number of critical warnings after analysis.</td>
 </tr>
 <tr>
-<td align="left">Warnings</td>
-<td align="left">Integer. Contains the number of warnings after analysis.</td>
+<td style="text-align:left">Warnings</td>
+<td style="text-align:left">Integer. Contains the number of warnings after analysis.</td>
 </tr>
 <tr>
-<td align="left">Information</td>
-<td align="left">Integer. Contains the number of information after analysis.</td>
+<td style="text-align:left">Information</td>
+<td style="text-align:left">Integer. Contains the number of information after analysis.</td>
 </tr>
 </tbody>
 </table>
@@ -814,13 +809,13 @@ If you are looking how to run SPCAF v4 during TeamBuild in TFS 2013, see this po
         Joost Haneveer
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.73.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.82.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b2d69769961fb5934804cd2745ac25ca7c5dc16d5df461241e8eea24ede9ea82.js" integrity="sha256-staXaZYftZNIBM0nRawlynxdwW1d9GEkHo7qJO3p6oI="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.7fdb0d9809732a0ad592fabe60117e5fa45780a03d20dda94535b87070ab3cc4.js" integrity="sha256-f9sNmAlzKgrVkvq&#43;YBF&#43;X6RXgKA9IN2pRTW4cHCrPMQ="></script>
     <script src="/js/add-on.js"></script>
 <script type="application/javascript">
 var doNotTrack = false;

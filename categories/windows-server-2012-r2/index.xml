@@ -6,11 +6,7 @@
     <description>Recent content in Windows Server 2012 R2 on Joost&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Nov 2013 10:30:26 +0000</lastBuildDate>
-    
-	<atom:link href="https://joosthaneveer.github.io/categories/windows-server-2012-r2/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 26 Nov 2013 10:30:26 +0000</lastBuildDate><atom:link href="https://joosthaneveer.github.io/categories/windows-server-2012-r2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows Server 2012 R2 install on HP MicroServer N40L fails</title>
       <link>https://joosthaneveer.github.io/windows-server/windows-server-2012-r2/windows-server-2012-r2-installation-hp-microserver-n40l-fails/</link>
