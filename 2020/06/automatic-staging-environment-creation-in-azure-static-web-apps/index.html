@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.82.0" /><meta property="og:site_name" content="Joost&#39;s blog">
+<meta name="generator" content="Hugo 0.83.1" /><meta property="og:site_name" content="Joost&#39;s blog">
   <meta property="og:title" content="Automatic staging environment creation in Azure Static Web Apps">
   <meta property="og:description" content="">
   <meta property="description" content="">
@@ -19,8 +19,8 @@
     
   
   <meta property="twitter:site" content="joosthaneveer">
-            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/github.min.css">
-          <link rel="stylesheet" href="/css/bundle.min.0fe7d3e300d1134847c0dcd26069f3c7a41912fa53e69bf61e84b0ebbce3db91.css" integrity="sha256-D&#43;fT4wDRE0hHwNzSYGnzx6QZEvpT5pv2HoSw67zj25E="><link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/github.min.css">
+          <link rel="stylesheet" href="/css/bundle.min.1bfccf86359e3de974865922b006112447a52f942c2a9c2bf93d159980ae641b.css" integrity="sha256-G/zPhjWePel0hlkisAYRJEelL5QsKpwr&#43;T0VmYCuZBs="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -163,8 +163,9 @@
 
       <main id="site-main">
         
-  <article class="post">
-    <header>
+  <article>
+    <div class="post">
+      <header>
   <div class="title">
     
       <h2><a href="/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/">Automatic staging environment creation in Azure Static Web Apps</a></h2>
@@ -178,8 +179,8 @@
   </div>
 </header>
 
-    <div id="socnet-share">
-      
+      <div id="socnet-share">
+        
 
 
 
@@ -210,12 +211,12 @@
   
 
 
-    </div>
-    <div class="content">
-      <a href="/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/" class="image" style="--bg-image: url('https://joosthaneveer.github.io/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/Azure-portal-environments-overview-staging-created.png');">
+      </div>
+      <div class="content">
+        <a href="/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/" class="image" style="--bg-image: url('https://joosthaneveer.github.io/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/Azure-portal-environments-overview-staging-created.png');">
     <img src="https://joosthaneveer.github.io/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/Azure-portal-environments-overview-staging-created.png" alt="Environment page in the Azure Portal">
   </a>
-      <p>Everyone knows that publishing code directly to Production is not the best idea. Azure Static Web Apps offer the ability to automatically create a fully-functional staging environment for you when you want to publish new code.</p>
+        <p>Everyone knows that publishing code directly to Production is not the best idea. Azure Static Web Apps offer the ability to automatically create a fully-functional staging environment for you when you want to publish new code.</p>
 <p>I&rsquo;m going to start this article based on the assumption that you&rsquo;ve already set up your Azure Static Web App and the <a href="https://docs.microsoft.com/en-us/azure/static-web-apps/github-actions-workflow">GitHub Action</a> that is publishing your content to Azure. (Not yet? <a href="https://docs.microsoft.com/en-us/azure/static-web-apps/publish-hugo">Here is a tutorial how to setup Hugo on Azure Static Web Apps</a>)</p>
 <h3 id="make-the-change">Make the change</h3>
 <p>Begin with making a change to the code in your repository. Make sure you do this in a seperate branch.
@@ -237,9 +238,9 @@ Your staging environment will be automatically deleted at this time.</p>
 <img src="/2020/06/automatic-staging-environment-creation-in-azure-static-web-apps/Azure-portal-environments-overview-staging-deleting.png" alt="">
 <p>The GitHub Action running on your main branch kicks in again to build and publish your code to your Production URL.</p>
 
-    </div>
-    <footer>
-      <div class="stats">
+      </div>
+      <footer>
+        <div class="stats">
   
     <ul class="categories">
       
@@ -262,12 +263,13 @@ Your staging environment will be automatically deleted at this time.</p>
   
 </div>
 
-    </footer>
-  </article>
-  
+      </footer>
+    </div>
     
+      
 
-  
+    
+  </article>
   <div class="pagination">
     
     
@@ -429,14 +431,14 @@ Your staging environment will be automatically deleted at this time.</p>
   <p class="copyright">
     © 2020 Joost Haneveer
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.82.0' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.83.1' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/css.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/javascript.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/ini.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/xml.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.0d5e8ac1d85d8099bdf7808daad895a475c163efad3542448e3f7b31852b6ad5.js" integrity="sha256-DV6KwdhdgJm994CNqtiVpHXBY&#43;&#43;tNUJEjj97MYUratU="></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/css.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/javascript.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/ini.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/xml.min.js"></script>
+    <script>hljs.highlightAll();</script><script src="/js/bundle.min.0d6d5906b5bbda82c593c22fb4c2af1bf9a99cf2d58e2734fe9c144f15e54232.js" integrity="sha256-DW1ZBrW72oLFk8IvtMKvG/mpnPLVjic0/pwUTxXlQjI="></script>
     <script src="/js/add-on.js"></script>
 <script type="application/javascript">
 var doNotTrack = false;
